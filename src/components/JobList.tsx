@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSavedJobs } from "../hooks/useSavedJobs";
 import { useJobFilters } from "../hooks/useJobFilters";
 import { allTags } from "../constants/tags";
@@ -16,23 +16,16 @@ import {
     Grid,
     TextField,
 } from "@mui/material";
+import { getFilteredJobs } from "../utils/jobFilters";
 
 export const JobList: React.FC = () => {
     const { savedJobs, toggleSavedJob } = useSavedJobs();
     const { selectedTags, toggleTag, searchTerm, setSearchTerm } = useJobFilters();
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
     const [open, setOpen] = useState(false);
-
-    const filteredJobs = jobs.filter((job) => {
-        const matchesSearch =
-            job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            job.company.toLowerCase().includes(searchTerm.toLowerCase());
-
-        const matchesTags =
-            selectedTags.length === 0 || selectedTags.every((tag) => job.tags.includes(tag));
-
-        return matchesSearch && matchesTags;
-    });
+    const filteredJobs = useMemo(() => {
+        return getFilteredJobs(jobs, searchTerm, selectedTags);
+    }, [searchTerm, selectedTags]);
 
     return (
         <Box p={4}>
