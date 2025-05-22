@@ -1,44 +1,21 @@
 import React from "react";
-import { Card, CardContent, Typography, Box, Chip, Stack } from "@mui/material";
+import { Card, CardContent, Typography, Chip, Stack } from "@mui/material";
 import type { Job } from "../types";
 
-
-type JobCardProps = {
-  job: Job;
-  onClick?: () => void;
+export const JobCard: React.FC<{ job: Job; onClick: () => void }> = ({ job, onClick }) => {
+    return (
+        <Card onClick={onClick} sx={{ cursor: "pointer", mb: 2 }}>
+            <CardContent>
+                <Typography variant="h6">{job.title}</Typography>
+                <Typography variant="subtitle2">{job.company}</Typography>
+                <Typography variant="body2">{job.location} — {job.type}</Typography>
+                <Stack direction="row" spacing={1} mt={1}>
+                    {job.tags.map((tag) => (
+                        <Chip key={tag} label={tag} />
+                    ))}
+                </Stack>
+            </CardContent>
+        </Card>
+    );
 };
 
-const JobCard: React.FC<JobCardProps> = ({ job, onClick }) => {
-  return (
-    <Card 
-      onClick={onClick} 
-      sx={{ 
-        cursor: "pointer", 
-        mb: 2, 
-        transition: "0.3s", 
-        "&:hover": { boxShadow: 6 } 
-      }}
-    >
-      <CardContent>
-        <Typography variant="h6" fontWeight="bold">
-          {job.title}
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary">
-          {job.company} — {job.location}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" mt={1}>
-          Type: {job.type}
-        </Typography>
-        <Box mt={2}>
-          <Stack direction="row" spacing={1} flexWrap="wrap">
-            {job.tags.map((tag, index) => (
-              <Chip key={index} label={tag} size="small" color="primary" />
-            ))}
-          </Stack>
-        </Box>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default JobCard;

@@ -1,17 +1,12 @@
-import React from "react";
-import JobCard from "./components/JobCard";
-import { Container } from "@mui/material";
-import { jobs } from "./data/jobs";
 
-const JobList = () => {
+import { JobList } from "./components/JobList";
+
+
+function App() {
   return (
-    <Container>
-      {jobs.map((job) => (
-        <JobCard key={job.id} job={job} onClick={() => console.log(job.title)} />
-      ))}
-    </Container>
+    <JobList />
   );
-};
+}
 
-export default JobList;
+export default App;
 
