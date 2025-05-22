@@ -1,5 +1,12 @@
 
 import React, { useState } from "react";
+import { useSavedJobs } from "../hooks/useSavedJobs";
+import { useJobFilters } from "../hooks/useJobFilters";
+import { allTags } from "../constants/tags";
+import { jobs } from "../data/jobs";
+import { JobCard } from "./JobCard";
+import { JobDetailsModal } from "./JobDetailsModal";
+import type { Job } from "../types";
 import {
     Box,
     Checkbox,
@@ -9,36 +16,14 @@ import {
     Grid,
     TextField,
 } from "@mui/material";
-import { jobs as mockJobs } from "../data/jobs";
-import { JobCard } from "./JobCard";
-import { JobDetailsModal } from "./JobDetailsModal";
-import type { Job } from "../types";
-
-const allTags = ["React", "Next.js", "TypeScript", "Node.js", "Express", "MongoDB", "JavaScript"];
 
 export const JobList: React.FC = () => {
-    const [selectedTags, setSelectedTags] = useState<string[]>([]);
-    const [searchTerm, setSearchTerm] = useState("");
+    const { savedJobs, toggleSavedJob } = useSavedJobs();
+    const { selectedTags, toggleTag, searchTerm, setSearchTerm } = useJobFilters();
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
     const [open, setOpen] = useState(false);
 
-    const handleTagChange = (tag: string) => {
-        setSelectedTags((prev) =>
-            prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-        );
-    };
-
-    const handleOpenModal = (job: Job) => {
-        setSelectedJob(job);
-        setOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setOpen(false);
-        setSelectedJob(null);
-    };
-
-    const filteredJobs = mockJobs.filter((job) => {
+    const filteredJobs = jobs.filter((job) => {
         const matchesSearch =
             job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             job.company.toLowerCase().includes(searchTerm.toLowerCase());
@@ -69,12 +54,7 @@ export const JobList: React.FC = () => {
                 {allTags.map((tag) => (
                     <FormControlLabel
                         key={tag}
-                        control={
-                            <Checkbox
-                                checked={selectedTags.includes(tag)}
-                                onChange={() => handleTagChange(tag)}
-                            />
-                        }
+                        control={<Checkbox checked={selectedTags.includes(tag)} onChange={() => toggleTag(tag)} />}
                         label={tag}
                     />
                 ))}
@@ -83,12 +63,21 @@ export const JobList: React.FC = () => {
             <Grid container spacing={3}>
                 {filteredJobs.map((job) => (
                     <Grid item xs={12} sm={6} md={4} key={job.id}>
-                        <JobCard job={job} onClick={() => handleOpenModal(job)} />
+                        <JobCard
+                            job={job}
+                            onClick={() => {
+                                setSelectedJob(job);
+                                setOpen(true);
+                            }}
+                            onSave={toggleSavedJob}
+                            isSaved={savedJobs.some((j) => j.id === job.id)}
+                        />
                     </Grid>
                 ))}
             </Grid>
 
-            <JobDetailsModal open={open} onClose={handleCloseModal} job={selectedJob} />
+            <JobDetailsModal open={open} onClose={() => setOpen(false)} job={selectedJob} />
         </Box>
     );
 };
+
