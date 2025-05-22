@@ -6,3 +6,10 @@ export interface Job {
     type: string;
     tags: string[];
 }
+
+export type JobCardProps = {
+    job: Job;
+    onClick: () => void;
+    onSave: (job: Job) => void;
+    isSaved: boolean;
+};
