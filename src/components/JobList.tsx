@@ -28,7 +28,7 @@ export const JobList: React.FC = () => {
     }, [searchTerm, selectedTags]);
 
     return (
-        <Box p={4}>
+        <Box px={{ xs: 2, md: 4 }} py={4}>
             <Typography variant="h4" gutterBottom>
                 Job Listings
             </Typography>
@@ -37,7 +37,7 @@ export const JobList: React.FC = () => {
                 label="Search by title or company"
                 variant="outlined"
                 fullWidth
-                sx={{ mb: 3 }}
+                sx={{ mb:  { xs: 2, sm: 3 } }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
