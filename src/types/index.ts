@@ -5,6 +5,7 @@ export interface Job {
     location: string;
     type: string;
     tags: string[];
+    description: string;
 }
 
 export type JobCardProps = {

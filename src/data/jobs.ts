@@ -1,4 +1,3 @@
-
 export const jobs = [
     {
         id: 1,
@@ -7,6 +6,7 @@ export const jobs = [
         location: "Remote",
         type: "Full-time",
         tags: ["React", "TypeScript"],
+        description: "Work on UI components using React and TS.",
     },
     {
         id: 2,
@@ -15,6 +15,7 @@ export const jobs = [
         location: "New York",
         type: "Contract",
         tags: ["Node.js", "Express"],
+        description: "Build and maintain APIs for scalable apps.",
     },
     {
         id: 3,
@@ -23,6 +24,7 @@ export const jobs = [
         location: "San Francisco",
         type: "Part-time",
         tags: ["React", "Node.js", "MongoDB"],
+        description: "Develop full stack features using the MERN stack.",
     },
     {
         id: 4,
@@ -31,6 +33,7 @@ export const jobs = [
         location: "Remote",
         type: "Full-time",
         tags: ["JavaScript", "HTML", "CSS"],
+        description: "Support development tasks and gain experience.",
     },
     {
         id: 5,
@@ -39,6 +42,7 @@ export const jobs = [
         location: "Austin",
         type: "Full-time",
         tags: ["AWS", "Docker", "CI/CD"],
+        description: "Maintain and automate infrastructure and deployment.",
     },
     {
         id: 6,
@@ -47,6 +51,7 @@ export const jobs = [
         location: "Remote",
         type: "Contract",
         tags: ["React Native", "TypeScript"],
+        description: "Develop cross-platform mobile apps using React Native.",
     },
     {
         id: 7,
@@ -55,6 +60,7 @@ export const jobs = [
         location: "Chicago",
         type: "Full-time",
         tags: ["Python", "SQL", "Tableau"],
+        description: "Analyze data and build interactive dashboards.",
     },
     {
         id: 8,
@@ -63,6 +69,7 @@ export const jobs = [
         location: "Berlin",
         type: "Part-time",
         tags: ["Figma", "Adobe XD", "Wireframes"],
+        description: "Design user interfaces and improve UX workflows.",
     },
     {
         id: 9,
@@ -71,6 +78,7 @@ export const jobs = [
         location: "London",
         type: "Full-time",
         tags: ["Java", "Spring Boot"],
+        description: "Implement backend services using Java and Spring Boot.",
     },
     {
         id: 10,
@@ -79,6 +87,6 @@ export const jobs = [
         location: "Remote",
         type: "Contract",
         tags: ["Cypress", "Jest", "Manual Testing"],
+        description: "Ensure product quality through manual and automated testing.",
     },
 ];
-

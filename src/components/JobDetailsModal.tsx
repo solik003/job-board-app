@@ -45,6 +45,13 @@ export const JobDetailsModal: React.FC<Props> = ({ open, onClose, job }) => {
                         <Chip key={tag} label={tag} />
                     ))}
                 </Stack>
+
+                <Typography variant="subtitle2" gutterBottom>
+                    Job Description:
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                    {job.description}
+                </Typography>
             </Box>
         </Modal>
     );
