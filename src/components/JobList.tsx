@@ -28,7 +28,7 @@ export const JobList: React.FC = () => {
     }, [searchTerm, selectedTags]);
 
     return (
-        <Box px={{ xs: 2, md: 4 }} py={4}>
+        <Box px={{ xs: 2, md: 4 }} py={2}>
             <Typography variant="h4" gutterBottom>
                 Job Listings
             </Typography>
@@ -37,7 +37,7 @@ export const JobList: React.FC = () => {
                 label="Search by title or company"
                 variant="outlined"
                 fullWidth
-                sx={{ mb:  { xs: 2, sm: 3 } }}
+                sx={{ mb: { xs: 2, sm: 3 } }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -55,7 +55,14 @@ export const JobList: React.FC = () => {
 
             <Grid container spacing={3}>
                 {filteredJobs.map((job) => (
-                    <Grid item xs={12} sm={6} md={4} key={job.id}>
+                    <Box sx={{
+                        width: {
+                          xs: '100%',    
+                          sm: '48%',     
+                          md: '30%',  
+                        },
+                        cursor: 'pointer',
+                      }}>
                         <JobCard
                             job={job}
                             onClick={() => {
@@ -65,7 +72,7 @@ export const JobList: React.FC = () => {
                             onSave={toggleSavedJob}
                             isSaved={savedJobs.some((j) => j.id === job.id)}
                         />
-                    </Grid>
+                    </Box>
                 ))}
             </Grid>
 
